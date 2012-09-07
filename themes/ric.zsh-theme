@@ -32,5 +32,6 @@ RIC_DIR_="$RIC_DIR_COLOR%~ %{$reset_color%}\$(git_prompt_info) "
 RIC_PROMPT="$RIC_PROMPT_COLOR%(!.#.$) %{$reset_color%}"
 
 # Put it all together!
-PROMPT="$RIC_RVM_$RIC_USER_ at $RIC_HOST_ in $RIC_DIR_
+PROMPT="
+$RIC_RVM_$RIC_USER_ at $RIC_HOST_ in $RIC_DIR_
 $RIC_PROMPT"
