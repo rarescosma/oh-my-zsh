@@ -2,8 +2,8 @@
 #
 # Colors are at the top so you can mess with those separately if you like.
 
-
 RIC_RVM_COLOR="%{$fg[red]%}"
+RIC_VENV_COLOR="%{$fg[blue]%}"
 RIC_USER_COLOR="%{$fg[yellow]%}"
 RIC_HOST_COLOR="%{$fg[magenta]%}"
 RIC_DIR_COLOR="%{$fg[cyan]%}"
@@ -20,12 +20,24 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED=" $RIC_GIT_UNTRACKED_COLOR?"
 ZSH_THEME_GIT_PROMPT_DIRTY=" $RIC_GIT_DIRTY_COLOR!"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
-# Our elements:
+# RVM
 if which rvm-prompt &> /dev/null; then
-	RIC_RVM_="$RIC_RVM_COLOR\${\$(~/.rvm/bin/rvm-prompt i v g)#ruby-}%{$reset_color%} for "
+	RIC_RVM_="$RIC_RVM_COLOR"r"\${\$(~/.rvm/bin/rvm-prompt i v g)#ruby-}%{$reset_color%} "
 else
 	RIC_RVM_=""
 fi
+
+# Virtualenv
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+function python_info {
+	PVER=`python -c 'import sys; print(".".join(map(str, sys.version_info[:3])))'`
+	echo -n "p$PVER"
+}
+
+
+RIC_VENV_=$(python_info)
+RIC_VENV_="$RIC_VENV_COLOR%(!..$RIC_VENV_ )%{$reset_color%}"
 RIC_USER_="$RIC_USER_COLOR%n%{$reset_color%}"
 RIC_HOST_="$RIC_HOST_COLOR%m%{$reset_color%}"
 RIC_DIR_="$RIC_DIR_COLOR%~ %{$reset_color%}\$(git_prompt_info) "
@@ -33,5 +45,5 @@ RIC_PROMPT="$RIC_PROMPT_COLOR%(!.#.$) %{$reset_color%}"
 
 # Put it all together!
 PROMPT="
-$RIC_RVM_$RIC_USER_ at $RIC_HOST_ in $RIC_DIR_
+$RIC_VENV_$RIC_RVM_$RIC_USER_ at $RIC_HOST_ in $RIC_DIR_
 $RIC_PROMPT"
