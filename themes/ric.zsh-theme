@@ -30,17 +30,11 @@ fi
 # Virtualenv
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-function python_info {
-	PVER=`python -c 'import sys; print(".".join(map(str, sys.version_info[:3])))'`
-	echo -n "p$PVER"
-}
-
-
 RIC_VENV_=$(python_info)
 RIC_VENV_="$RIC_VENV_COLOR%(!..$RIC_VENV_ )%{$reset_color%}"
 RIC_USER_="$RIC_USER_COLOR%n%{$reset_color%}"
 RIC_HOST_="$RIC_HOST_COLOR%m%{$reset_color%}"
-RIC_DIR_="$RIC_DIR_COLOR%~ %{$reset_color%}\$(git_prompt_info) "
+RIC_DIR_="$RIC_DIR_COLOR%d %{$reset_color%}\$(git_prompt_info) "
 RIC_PROMPT="$RIC_PROMPT_COLOR%(!.#.$) %{$reset_color%}"
 
 # Put it all together!
