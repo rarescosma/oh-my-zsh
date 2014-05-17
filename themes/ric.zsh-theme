@@ -28,10 +28,14 @@ else
 fi
 
 # Virtualenv
-export VIRTUAL_ENV_DISABLE_PROMPT=1
+if which python_info &> /dev/null; then
+	export VIRTUAL_ENV_DISABLE_PROMPT=1
+	RIC_VENV_=$(python_info)
+	RIC_VENV_="$RIC_VENV_COLOR%(!..$RIC_VENV_ )%{$reset_color%}"
+else
+	RIC_VENV_=""
+fi
 
-RIC_VENV_=$(python_info)
-RIC_VENV_="$RIC_VENV_COLOR%(!..$RIC_VENV_ )%{$reset_color%}"
 RIC_USER_="$RIC_USER_COLOR%n%{$reset_color%}"
 RIC_HOST_="$RIC_HOST_COLOR%m%{$reset_color%}"
 RIC_DIR_="$RIC_DIR_COLOR%d %{$reset_color%}\$(git_prompt_info) "
