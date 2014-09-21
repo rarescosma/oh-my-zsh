@@ -1,7 +1,6 @@
 # RIC - by Rares Cosma <office@rarescosma.com>
 #
 # Colors are at the top so you can mess with those separately if you like.
-
 RIC_RVM_COLOR="%{$fg[red]%}"
 RIC_NVM_COLOR="%{$fg[green]%}"
 RIC_VENV_COLOR="%{$fg[blue]%}"
@@ -29,6 +28,8 @@ RIC_PROMPT="$RIC_PROMPT_COLOR%(!.#.$) %{$reset_color%}"
 # RVM
 if which rvm-prompt &> /dev/null; then
 	RIC_RVM_="$RIC_RVM_COLOR\${\$(~/.rvm/bin/rvm-prompt i v g | sed 's/uby\-//')}%{$reset_color%} "
+elif which ruby &> /dev/null; then
+	RIC_RVM_="$RIC_RVM_COLOR$(echo -n 'r'; ruby -v | cut -d' ' -f 2)%{$reset_color%} "
 else
 	RIC_RVM_=""
 fi
