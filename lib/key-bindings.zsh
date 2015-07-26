@@ -33,6 +33,9 @@ bindkey '^[[3~' delete-char                         # [fn-Delete] - delete forwa
 bindkey '^[3;5~' delete-char                        # [TODO] - delete forward
 bindkey '\e[3~' delete-char                         # [TODO] - delete forward
 
+# file rename magick
+bindkey "^[m" copy-prev-shell-word
+
 # consider emacs keybindings:
 
 #bindkey -e  ## emacs key bindings
