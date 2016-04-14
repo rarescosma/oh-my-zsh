@@ -88,13 +88,12 @@ compdef _git gdv=git-diff
 alias gdw='git diff --word-diff'
 
 alias gf='git fetch'
-alias gfa='git fetch --all --prune'
+alias gfp='git fetch --all --prune'
 function gfg() { git ls-files | grep $@ }
 compdef gfg=grep
 alias gfo='git fetch origin'
 
-alias gg='git gui citool'
-alias gga='git gui citool --amend'
+alias gg='gitg'
 ggf() {
 [[ "$#" != 1 ]] && local b="$(current_branch)"
 git push --force origin "${b:=$1}"
@@ -158,7 +157,7 @@ alias glgm='git log --graph --max-count=10'
 alias glo='git log --oneline --decorate --color'
 alias glol="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias glola="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
-alias glog='git log --oneline --decorate --color --graph'
+alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias glp="_git_log_prettily"
 compdef _git glp=git-log
 
@@ -199,7 +198,7 @@ alias gsi='git submodule init'
 alias gsps='git show --pretty=short --show-signature'
 alias gsr='git svn rebase'
 alias gss='git status -s'
-alias gst='git status'
+alias gs='git status'
 alias gsta='git stash'
 alias gstaa='git stash apply'
 alias gstd='git stash drop'
@@ -207,6 +206,7 @@ alias gstl='git stash list'
 alias gstp='git stash pop'
 alias gsts='git stash show --text'
 alias gsu='git submodule update'
+alias gsm='git submodule update --init --recursive'
 
 alias gts='git tag -s'
 
