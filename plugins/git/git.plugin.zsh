@@ -99,8 +99,7 @@ alias gfo='git fetch origin'
 function gfg() { git ls-files | grep $@ }
 compdef _grep gfg
 
-alias gg='git gui citool'
-alias gga='git gui citool --amend'
+alias gg='gitg'
 
 ggf() {
   [[ "$#" != 1 ]] && local b="$(git_current_branch)"
