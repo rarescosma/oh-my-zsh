@@ -93,7 +93,7 @@ gdv() { git diff -w "$@" | view - }
 compdef _git gdv=git-diff
 
 alias gf='git fetch'
-alias gfa='git fetch --all --prune'
+alias gfp='git fetch --all --prune'
 alias gfo='git fetch origin'
 
 function gfg() { git ls-files | grep $@ }
@@ -239,3 +239,5 @@ alias glum='git pull upstream master'
 
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip-- [skip ci]"'
+alias gpullall='find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin master \;'
+alias gfetchall='find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} fetch --prune \;'
