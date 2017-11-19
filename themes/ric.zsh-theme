@@ -1,5 +1,11 @@
-# RIC - by Rares Cosma <office@rarescosma.com>
-#
+# RIC - by Rareș Cosma <rares@getbetter.ro>
+setopt prompt_subst
+autoload -U add-zsh-hook
+
+source $ZSH/vendor/zsh-kubectl-prompt/kubectl.zsh
+_lineup=$'\e[1A'
+_linedown=$'\e[1B'
+
 # Colors are at the top so you can mess with those separately if you like.
 RIC_USER_COLOR="%{$fg[yellow]%}"
 RIC_HOST_COLOR="%{$fg[magenta]%}"
@@ -17,28 +23,17 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED=" $RIC_GIT_UNTRACKED_COLOR?"
 ZSH_THEME_GIT_PROMPT_DIRTY=" $RIC_GIT_DIRTY_COLOR!"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
-RIC_USER_="$RIC_USER_COLOR%n%{$reset_color%}"
-RIC_HOST_="$RIC_HOST_COLOR@%m%{$reset_color%}"
-RIC_DIR_="$RIC_DIR_COLOR%d %{$reset_color%}\$(git_prompt_info) "
-RIC_PROMPT="$RIC_PROMPT_COLOR%(!.#.$) %{$reset_color%}"
-
-refresh_prompt() {
-	# Virtualenv
-	if which virtualenvwrapper.sh &> /dev/null; then
-		RIC_VENV_="p$(python -c 'import sys; print(".".join(map(str, sys.version_info[:3])))')"
-		if [[ $VIRTUAL_ENV != "" ]]; then
-			RIC_VENV_="$RIC_VENV_@${VIRTUAL_ENV##*/}"
-		fi
-		RIC_VENV_="$RIC_VENV_COLOR%(!..$RIC_VENV_ )%{$reset_color%}"
-	else
-		RIC_VENV_=""
-	fi
-
-	# Put it all together!
-#	PROMPT="
-PROMPT="$RIC_HOST_ $RIC_DIR_
-$RIC_PROMPT"
+function collapse_pwd {
+  echo $(pwd | sed -e "s,^$HOME,~,")
 }
 
-refresh_prompt
+add-zsh-hook precmd _ric_theme_prompt_precmd
+function _ric_theme_prompt_precmd() {
+  RIC_USER_="$RIC_USER_COLOR%n%{$reset_color%}"
+  RIC_HOST_="$RIC_HOST_COLOR@%m%{$reset_color%}"
+  RIC_DIR_="$RIC_DIR_COLOR$(collapse_pwd) %{$reset_color%}\$(git_prompt_info) "
+  PROMPT="$RIC_HOST_ $RIC_DIR_
+$RIC_PROMPT_COLOR%(!.#.$) %{$reset_color%}"
+}
 
+RPROMPT='%{${_lineup}%}%{$fg[green]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}%{${_linedown}%}'
