@@ -36,4 +36,4 @@ function _ric_theme_prompt_precmd() {
 $RIC_PROMPT_COLOR%(!.#.$) %{$reset_color%}"
 }
 
-RPROMPT='%{${_lineup}%}%{$fg[green]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}%{${_linedown}%}'
+RPROMPT='%{${_lineup}%}%{$fg[cyan]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}%{${_linedown}%}'
