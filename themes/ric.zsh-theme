@@ -20,6 +20,6 @@ PROMPT="\
 %{$fg[magenta]%}@%m%{$reset_color%} \
 %{$fg[cyan]%}%~%{$reset_color%} \
 \$(git_prompt_info)
-%{$fg[gray]%}%(!.#.$) %{$reset_color%}"
+%{$fg[gray]%}%(!.#.$) %(?..[%{$fg[red]%}%?%{$reset_color%}] )%{$reset_color%}"
 
 RPROMPT='%{${_lineup}%}%{$fg[cyan]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}%{${_linedown}%}'
